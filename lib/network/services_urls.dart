@@ -1,9 +1,9 @@
 class ServicesURLs {
-  String? developmentEnvironmentWithoutHttp = 'api.apilayer.com';
+  String? developmentEnvironmentWithoutHttp = 'free.currconv.com';
 
   String? developmentEnvironmentScheme = 'https';
 
-  String? developmentEnvironment = 'https://api.apilayer.com/';
+  String? developmentEnvironment = 'https://free.currconv.com/';
 
-  static const supportedCurrenceyUrl = 'fixer/symbols';
+  static const supportedCurrenceyUrl = 'api/v7/countries';
 }

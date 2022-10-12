@@ -15,7 +15,7 @@ class ApiClient {
       HttpHeaders.contentTypeHeader: 'application/json',
       "Abp.TenantId": '1',
     };
-    mHeaders['apikey'] = dotenv.env['API_KEY']!;
+
     return mHeaders;
   }
 

@@ -1,23 +1,27 @@
-import 'package:currencie_app/screens/home/widgets/main_currenice_counter.dart';
 import 'package:currencie_app/utils/styles/colors_scheme.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class SelectDefaultCurrencieScreen extends StatelessWidget {
+  const SelectDefaultCurrencieScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        width: double.infinity,
         decoration: const BoxDecoration(
           gradient: AppColors.backgroundLiner,
         ),
         child: Column(
-          children: const [
-            SizedBox(
+          children: [
+            const SizedBox(
               height: 40,
             ),
-            MainCurreniceCounter()
+            const Text(
+              'Select Default Currencie',
+              style: TextStyle(
+                  color: AppColors.textColor, fontWeight: FontWeight.bold),
+            )
           ],
         ),
       ),

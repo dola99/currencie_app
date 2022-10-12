@@ -1,33 +1,24 @@
+import 'package:currencie_app/models/data/currencie_item_model.dart';
+
 class CurrencySupportedModel {
-  late bool? success;
   late List<CurrencyItemModel> supportedCurrencey;
 
   CurrencySupportedModel({
-    required this.success,
     required this.supportedCurrencey,
   });
 
   CurrencySupportedModel.fromJson(Map<String, dynamic> json) {
-    Map<String, dynamic> mapOfSupportedCurrencey = json['symobls'];
-    success = json['success'];
+    Map<String, dynamic> mapOfSupportedCurrencey = json['results'];
+
     supportedCurrencey = mapOfSupportedCurrencey.entries
         .map((entry) => CurrencyItemModel(
-            titleOfCurrency: entry.value, keyOfCurrencey: entry.key))
+            countryId: entry.key,
+            counrtyName: entry.value['name'],
+            currenceyName: entry.value['currencyName'],
+            currenceySymbol: entry.value['currencySymbol'],
+            currencyId: entry.value['currencyId'],
+            flagUrl:
+                'https://flagcdn.com/60x45/${entry.key.toLowerCase()}.png'))
         .toList();
-    print('gasdsadasa');
   }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['success'] = success;
-
-    return data;
-  }
-}
-
-class CurrencyItemModel {
-  String keyOfCurrencey;
-  String titleOfCurrency;
-  CurrencyItemModel(
-      {required this.keyOfCurrencey, required this.titleOfCurrency});
 }

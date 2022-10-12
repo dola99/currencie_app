@@ -10,10 +10,10 @@ import 'package:get_it/get_it.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await LocalDb().initOfLocalStorge();
   await dotenv.load(fileName: ".env");
   AppColors().statusBarColor;
   registerSingletons();
+  await localDb.initOfLocalStorge();
   bootstrap(() => const StartPointMyApp());
 }
 
@@ -36,7 +36,7 @@ class StartPointMyApp extends StatelessWidget {
 }
 
 void registerSingletons() {
-  GetIt.I.registerLazySingleton<HomeCubit>(() => HomeCubit());
+  GetIt.I.registerLazySingleton<LocalDb>(() => LocalDb());
 }
 
-HomeCubit get appLogic => GetIt.I.get<HomeCubit>();
+LocalDb get localDb => GetIt.I.get<LocalDb>();
