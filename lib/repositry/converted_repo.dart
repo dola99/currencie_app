@@ -12,12 +12,12 @@ class ConvertedRepo {
         method: HttpMethod.GET,
         endPoint: ServicesURLs.convertUrl,
         queryParams: {
-          'q': '$firstCurrencie,$secondCurrencie',
+          'q': '${firstCurrencie}_PHP,${secondCurrencie}_PHP',
           'compact': 'ultra',
           'apiKey': dotenv.env['API_KEY']
         });
-    result = Right(response![firstCurrencie]);
-    result = Left(response[secondCurrencie]);
+    result = Right(response!['${firstCurrencie}_PHP']);
+    result = Left(response['${secondCurrencie}_PHP']);
 
     return result;
   }

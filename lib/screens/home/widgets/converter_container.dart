@@ -32,7 +32,9 @@ class ConverterDialog extends StatelessWidget {
                       return await showDialog(
                         context: context,
                         builder: (context) {
-                          return const DialogSelection();
+                          return DialogSelection(
+                            indexOfCurrencie: 0,
+                          );
                         },
                       );
                     },
@@ -46,7 +48,7 @@ class ConverterDialog extends StatelessWidget {
                       return await showDialog(
                         context: context,
                         builder: (context) {
-                          return const DialogSelection();
+                          return DialogSelection();
                         },
                       );
                     },

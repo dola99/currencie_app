@@ -10,22 +10,32 @@ class ConvertedCubit extends Cubit<ConvertedStatus> {
 
   static ConvertedCubit get(BuildContext context) => BlocProvider.of(context);
 
-  Future<void> convertedCurrencie(
-      String firstCurrencie, String secondCurrencie) async {
-    var result = await ConvertedRepo()
-        .convertedCurrency(firstCurrencie, secondCurrencie);
+  Future<void> convertedCurrencie() async {
+    var result = await ConvertedRepo().convertedCurrency(
+        convertedModel.firstCurrencie!.currencyId!,
+        convertedModel.secondCurrencie!.currencyId!);
     convertedModel.firstCurrencie!.valueOfCurrencie = result.right;
     convertedModel.secondCurrencie!.valueOfCurrencie = result.left;
     emit(CurrencyConverted());
   }
 
-  void selectedFirstCurrency(CurrencyItemModel currencyItemModel) {
+  Future<void> selectedFirstCurrency(
+      CurrencyItemModel currencyItemModel) async {
     convertedModel.selectFirstCurrencie(currencyItemModel);
-    emit(FirstCurrencieSelected());
+    if (convertedModel.secondCurrencie != null) {
+      await convertedCurrencie();
+    } else {
+      emit(FirstCurrencieSelected());
+    }
   }
 
-  void selectedSecondCurrency(CurrencyItemModel currencyItemModel) {
+  Future<void> selectedSecondCurrency(
+      CurrencyItemModel currencyItemModel) async {
     convertedModel.selectSecondCurrencie(currencyItemModel);
-    emit(SecondCurrencieSelected());
+    if (convertedModel.firstCurrencie != null) {
+      await convertedCurrencie();
+    } else {
+      emit(SecondCurrencieSelected());
+    }
   }
 }

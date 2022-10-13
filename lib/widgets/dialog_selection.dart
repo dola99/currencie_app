@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
 
 class DialogSelection extends StatelessWidget {
-  const DialogSelection({Key? key, this.onTap}) : super(key: key);
-  final void Function()? onTap;
+  DialogSelection({Key? key, this.indexOfCurrencie}) : super(key: key);
+  int? indexOfCurrencie;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,15 @@ class DialogSelection extends StatelessWidget {
             itemBuilder: (context, index) {
               return GestureDetector(
                 onTap: () {
-                  ConvertedCubit.get(context).selectedFirstCurrency(
-                      localDb.listOfSupportedCurrency.elementAt(index));
-                  CustomFunctions.popScreen(context);
+                  if (indexOfCurrencie == 0) {
+                    ConvertedCubit.get(context).selectedFirstCurrency(
+                        localDb.listOfSupportedCurrency.elementAt(index));
+                    CustomFunctions.popScreen(context);
+                  } else {
+                    ConvertedCubit.get(context).selectedSecondCurrency(
+                        localDb.listOfSupportedCurrency.elementAt(index));
+                    CustomFunctions.popScreen(context);
+                  }
                 },
                 child: Container(
                   margin: const EdgeInsets.only(bottom: 8),
