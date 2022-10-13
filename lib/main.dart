@@ -1,5 +1,6 @@
 import 'package:currencie_app/bootstrap.dart';
 import 'package:currencie_app/controllers/converted_cubit/converted_cubit.dart';
+import 'package:currencie_app/controllers/history_cubit/history_cubit.dart';
 import 'package:currencie_app/controllers/home_cubit/home_cubit.dart';
 import 'package:currencie_app/models/common/converted_model.dart';
 import 'package:currencie_app/models/local_db/local_db_module.dart';
@@ -31,6 +32,9 @@ class StartPointMyApp extends StatelessWidget {
           ),
           BlocProvider<ConvertedCubit>(
             create: (context) => ConvertedCubit(),
+          ),
+          BlocProvider<HistoryCubit>(
+            create: (context) => HistoryCubit(),
           ),
         ],
         child: const MaterialApp(

@@ -1,8 +1,10 @@
+import 'package:currencie_app/controllers/history_cubit/history_cubit.dart';
 import 'package:currencie_app/controllers/home_cubit/home_cubit.dart';
 import 'package:currencie_app/controllers/home_cubit/home_status.dart';
 import 'package:currencie_app/screens/home/widgets/converter_container.dart';
 import 'package:currencie_app/screens/home/widgets/default_currencie_container.dart';
 import 'package:currencie_app/screens/home/widgets/grid_view_of_countrys.dart';
+import 'package:currencie_app/screens/home/widgets/historical_container.dart';
 import 'package:currencie_app/utils/styles/colors_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +20,11 @@ class MainCurreniceCounter extends StatefulWidget {
 class _MainCurreniceCounterState extends State<MainCurreniceCounter> {
   @override
   void initState() {
-    HomeCubit.get(context).isFirstOpenForApp();
+    Future.wait([
+      HomeCubit.get(context).isFirstOpenForApp(),
+      HistoryCubit.get(context).getHistoricalData()
+    ]);
+
     super.initState();
   }
 
@@ -35,22 +41,18 @@ class _MainCurreniceCounterState extends State<MainCurreniceCounter> {
             ),
           );
         } else if (state is FirstOpenForAppStatus) {
-          return Expanded(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                const Text(
-                  'Select Default Currencie',
-                  style: TextStyle(
-                      color: AppColors.textColor, fontWeight: FontWeight.bold),
-                ),
-                Expanded(
-                    child: GridViewOfCountrys(
-                        currencieList: state.supportedCountry)),
-              ],
-            ),
+          return Column(
+            children: [
+              const SizedBox(
+                height: 40,
+              ),
+              const Text(
+                'Select Default Currencie',
+                style: TextStyle(
+                    color: AppColors.textColor, fontWeight: FontWeight.bold),
+              ),
+              GridViewOfCountrys(currencieList: state.supportedCountry),
+            ],
           );
         } else {
           return Padding(
@@ -61,7 +63,11 @@ class _MainCurreniceCounterState extends State<MainCurreniceCounter> {
                 SizedBox(
                   height: 20,
                 ),
-                ConverterDialog()
+                ConverterDialog(),
+                SizedBox(
+                  height: 20,
+                ),
+                HistoricalContainer()
               ],
             ),
           );

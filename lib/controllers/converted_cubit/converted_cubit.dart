@@ -10,12 +10,20 @@ class ConvertedCubit extends Cubit<ConvertedStatus> {
 
   static ConvertedCubit get(BuildContext context) => BlocProvider.of(context);
 
+  TextEditingController firstCurrencieTextController = TextEditingController();
+  TextEditingController secondCurrencieTextController = TextEditingController();
   Future<void> convertedCurrencie() async {
     var result = await ConvertedRepo().convertedCurrency(
         convertedModel.firstCurrencie!.currencyId!,
         convertedModel.secondCurrencie!.currencyId!);
-    convertedModel.firstCurrencie!.valueOfCurrencie = result.right;
-    convertedModel.secondCurrencie!.valueOfCurrencie = result.left;
+    convertedModel.firstCurrencie!.valueOfCurrencie =
+        result.values.elementAt(0);
+    firstCurrencieTextController.text = result.values.elementAt(0).toString();
+    convertedModel.secondCurrencie!.valueOfCurrencie =
+        result.values.elementAt(1);
+    secondCurrencieTextController.text =
+        '${result.values.elementAt(1).toStringAsFixed(5)}';
+
     emit(CurrencyConverted());
   }
 
@@ -37,5 +45,19 @@ class ConvertedCubit extends Cubit<ConvertedStatus> {
     } else {
       emit(SecondCurrencieSelected());
     }
+  }
+
+  void changeFirstCurrencyAmount(num firstCurrencieAmount) {
+    secondCurrencieTextController.text = convertedModel
+        .changeFirstAmount(firstCurrencieAmount)!
+        .toStringAsFixed(5);
+    emit(AmountChangedStatus());
+  }
+
+  void changeSecondCurrencyAmount(num secondCurrencieAmount) {
+    firstCurrencieTextController.text = convertedModel
+        .changeSecondAmount(secondCurrencieAmount)!
+        .toStringAsFixed(5);
+    emit(AmountChangedStatus());
   }
 }

@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:currencie_app/main.dart';
+import 'package:currencie_app/controllers/converted_cubit/converted_cubit.dart';
 import 'package:currencie_app/models/data/currencie_item_model.dart';
 import 'package:currencie_app/utils/styles/colors_scheme.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +7,12 @@ import 'package:image_network/image_network.dart';
 
 class SelectedCurrencieForConvert extends StatelessWidget {
   final CurrencyItemModel currencyItemModel;
-  const SelectedCurrencieForConvert({Key? key, required this.currencyItemModel})
+  const SelectedCurrencieForConvert(
+      {Key? key,
+      required this.currencyItemModel,
+      required this.indexOfCurrencie})
       : super(key: key);
-
+  final int? indexOfCurrencie;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -52,10 +55,33 @@ class SelectedCurrencieForConvert extends StatelessWidget {
             height: 20,
           ),
           if (currencyItemModel.valueOfCurrencie != null)
-            Text(
+            SizedBox(
+              width: 100,
+              height: 20,
+              child: TextFormField(
+                onFieldSubmitted: (newValue) {
+                  if (newValue.isNotEmpty) {
+                    if (indexOfCurrencie == 0) {
+                      ConvertedCubit.get(context)
+                          .changeFirstCurrencyAmount(num.tryParse(newValue)!);
+                    } else {
+                      ConvertedCubit.get(context)
+                          .changeSecondCurrencyAmount(num.tryParse(newValue)!);
+                    }
+                  }
+                },
+                controller: indexOfCurrencie == 0
+                    ? ConvertedCubit.get(context).firstCurrencieTextController
+                    : ConvertedCubit.get(context).secondCurrencieTextController,
+                style: const TextStyle(color: Colors.white, fontSize: 12),
+                textAlign: TextAlign.center,
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+              ),
+            ) /*Text(
               '${currencyItemModel.valueOfCurrencie}',
               style: const TextStyle(color: Colors.white),
-            )
+            )*/
         ],
       ),
     );

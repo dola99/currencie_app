@@ -19,8 +19,9 @@ class HomeCubit extends Cubit<HomeStatus> {
         await localDb.insertAll(
             supportedCountry.right.supportedCurrencey, 'SupportedCurrency');
         await localDb.getAll();
+      } else {
+        await localDb.getAll();
       }
-      await localDb.getAll();
       emit(SupportedCounryLoadedSucessfully(
           supportedCountry: supportedCountry.right.supportedCurrencey));
       return Right(supportedCountry.right.supportedCurrencey);

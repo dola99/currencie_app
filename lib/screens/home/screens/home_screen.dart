@@ -9,16 +9,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: AppColors.backgroundLiner,
         ),
-        child: Column(
-          children: const [
-            SizedBox(
-              height: 40,
-            ),
-            MainCurreniceCounter(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SizedBox(
+                height: 40,
+              ),
+              MainCurreniceCounter(),
+            ],
+          ),
         ),
       ),
     );

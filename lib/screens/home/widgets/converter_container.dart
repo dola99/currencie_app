@@ -22,43 +22,42 @@ class ConverterDialog extends StatelessWidget {
                 color: AppColors.primeryContainerColor,
                 borderRadius: BorderRadius.circular(Constant.borderRadius),
                 border: Border.all(color: AppColors.borderColor)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () async {
-                      return await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return DialogSelection(
-                            indexOfCurrencie: 0,
-                          );
-                        },
-                      );
-                    },
-                    child: convertedModel.firstCurrencie == null
-                        ? const EmpthySelectedCurrencie()
-                        : SelectedCurrencieForConvert(
-                            currencyItemModel: convertedModel.firstCurrencie!),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      return await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return DialogSelection();
-                        },
-                      );
-                    },
-                    child: convertedModel.secondCurrencie == null
-                        ? const EmpthySelectedCurrencie()
-                        : SelectedCurrencieForConvert(
-                            currencyItemModel: convertedModel.secondCurrencie!),
-                  ),
-                ],
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    return await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const DialogSelection(
+                          indexOfCurrencie: 0,
+                        );
+                      },
+                    );
+                  },
+                  child: convertedModel.firstCurrencie == null
+                      ? const EmpthySelectedCurrencie()
+                      : SelectedCurrencieForConvert(
+                          indexOfCurrencie: 0,
+                          currencyItemModel: convertedModel.firstCurrencie!),
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    return await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const DialogSelection();
+                      },
+                    );
+                  },
+                  child: convertedModel.secondCurrencie == null
+                      ? const EmpthySelectedCurrencie()
+                      : SelectedCurrencieForConvert(
+                          indexOfCurrencie: 1,
+                          currencyItemModel: convertedModel.secondCurrencie!),
+                ),
+              ],
             ),
           );
         }));

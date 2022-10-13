@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 part 'currencie_item_model.g.dart';
@@ -18,8 +17,9 @@ class CurrencyItemModel {
   late String? currenceySymbol;
   @HiveField(5)
   late String? flagUrl;
-
-  late double? valueOfCurrencie;
+  @HiveField(6)
+  late String? dateCreated;
+  late num? valueOfCurrencie;
   CurrencyItemModel(
       {this.countryId,
       this.counrtyName,
@@ -27,5 +27,6 @@ class CurrencyItemModel {
       this.currenceyName,
       this.currenceySymbol,
       this.valueOfCurrencie,
+      this.dateCreated,
       this.flagUrl});
 }

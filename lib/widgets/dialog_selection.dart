@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:image_network/image_network.dart';
 
 class DialogSelection extends StatelessWidget {
-  DialogSelection({Key? key, this.indexOfCurrencie}) : super(key: key);
-  int? indexOfCurrencie;
+  const DialogSelection({Key? key, this.indexOfCurrencie}) : super(key: key);
+  final int? indexOfCurrencie;
 
   @override
   Widget build(BuildContext context) {

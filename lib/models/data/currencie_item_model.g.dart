@@ -22,6 +22,7 @@ class CurrencyItemModelAdapter extends TypeAdapter<CurrencyItemModel> {
       currencyId: fields[2] as String?,
       currenceyName: fields[3] as String?,
       currenceySymbol: fields[4] as String?,
+      dateCreated: fields[6] as String?,
       flagUrl: fields[5] as String?,
     );
   }
@@ -29,7 +30,7 @@ class CurrencyItemModelAdapter extends TypeAdapter<CurrencyItemModel> {
   @override
   void write(BinaryWriter writer, CurrencyItemModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.countryId)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class CurrencyItemModelAdapter extends TypeAdapter<CurrencyItemModel> {
       ..writeByte(4)
       ..write(obj.currenceySymbol)
       ..writeByte(5)
-      ..write(obj.flagUrl);
+      ..write(obj.flagUrl)
+      ..writeByte(6)
+      ..write(obj.dateCreated);
   }
 
   @override

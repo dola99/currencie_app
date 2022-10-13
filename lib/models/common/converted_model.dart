@@ -11,4 +11,17 @@ class ConvertedModel {
   void selectSecondCurrencie(CurrencyItemModel currencyItemModel) {
     secondCurrencie = currencyItemModel;
   }
+
+  num? changeFirstAmount(num firstCurrencieAmount) {
+    var newSecondAmount =
+        firstCurrencieAmount * secondCurrencie!.valueOfCurrencie!;
+
+    return newSecondAmount;
+  }
+
+  num? changeSecondAmount(num secondCurrencieAmount) {
+    var newFirstAmount =
+        secondCurrencieAmount / secondCurrencie!.valueOfCurrencie!;
+    return newFirstAmount;
+  }
 }

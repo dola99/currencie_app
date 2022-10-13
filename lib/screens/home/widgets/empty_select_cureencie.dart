@@ -1,4 +1,3 @@
-import 'package:currencie_app/main.dart';
 import 'package:flutter/material.dart';
 
 class EmpthySelectedCurrencie extends StatelessWidget {
