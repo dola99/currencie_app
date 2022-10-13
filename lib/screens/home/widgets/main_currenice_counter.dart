@@ -1,10 +1,9 @@
 import 'package:currencie_app/controllers/home_cubit/home_cubit.dart';
 import 'package:currencie_app/controllers/home_cubit/home_status.dart';
-import 'package:currencie_app/screens/home/screens/select_default_currenice_screen.dart';
+import 'package:currencie_app/screens/home/widgets/converter_container.dart';
+import 'package:currencie_app/screens/home/widgets/default_currencie_container.dart';
 import 'package:currencie_app/screens/home/widgets/grid_view_of_countrys.dart';
-import 'package:currencie_app/utils/navigation.dart';
 import 'package:currencie_app/utils/styles/colors_scheme.dart';
-import 'package:currencie_app/utils/styles/constant.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -28,38 +27,47 @@ class _MainCurreniceCounterState extends State<MainCurreniceCounter> {
     return BlocConsumer<HomeCubit, HomeStatus>(
       builder: ((context, state) {
         if (state is LoadingSupportedCountry) {
-          return SpinKitCircle(
-            color: AppColors.textColor,
+          return const SizedBox(
+            child: Center(
+              child: SpinKitCircle(
+                color: AppColors.textColor,
+              ),
+            ),
           );
         } else if (state is FirstOpenForAppStatus) {
-          return GridViewOfCountrys(currencieList: state.supportedCountry);
-        }
-        return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Container(
-            height: 200,
-            width: double.infinity,
-            decoration: BoxDecoration(
-                color: AppColors.primeryContainerColor,
-                borderRadius: BorderRadius.circular(Constant.borderRadius),
-                border: Border.all(color: AppColors.borderColor)),
+          return Expanded(
             child: Column(
-              children: const [
-                SizedBox(
-                  height: 10,
+              children: [
+                const SizedBox(
+                  height: 40,
                 ),
-                Text(
-                  'Current Main Currenice',
+                const Text(
+                  'Select Default Currencie',
                   style: TextStyle(
                       color: AppColors.textColor, fontWeight: FontWeight.bold),
-                )
+                ),
+                Expanded(
+                    child: GridViewOfCountrys(
+                        currencieList: state.supportedCountry)),
               ],
             ),
-          ),
-        );
+          );
+        } else {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: Column(
+              children: const [
+                DefultCurrencieContainer(),
+                SizedBox(
+                  height: 20,
+                ),
+                ConverterDialog()
+              ],
+            ),
+          );
+        }
       }),
       listener: (context, state) {
-        print(state);
         if (state is SupportedCounryLoadedFailed) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(

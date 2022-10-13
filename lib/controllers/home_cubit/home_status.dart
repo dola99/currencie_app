@@ -27,3 +27,8 @@ class FirstOpenForAppStatus extends HomeStatus {
   late List<CurrencyItemModel> supportedCountry;
   FirstOpenForAppStatus({required this.supportedCountry});
 }
+
+class DefaultCurrencieSelectedStatus extends HomeStatus {
+  late CurrencyItemModel currencyItemModel;
+  DefaultCurrencieSelectedStatus({required this.currencyItemModel});
+}

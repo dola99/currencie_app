@@ -5,7 +5,7 @@ part 'currencie_item_model.g.dart';
 
 @HiveType(typeId: 1)
 @immutable
-class CurrencyItemModel extends Equatable {
+class CurrencyItemModel {
   @HiveField(0)
   late String? countryId;
   @HiveField(1)
@@ -18,14 +18,14 @@ class CurrencyItemModel extends Equatable {
   late String? currenceySymbol;
   @HiveField(5)
   late String? flagUrl;
+
+  late double? valueOfCurrencie;
   CurrencyItemModel(
       {this.countryId,
       this.counrtyName,
       this.currencyId,
       this.currenceyName,
       this.currenceySymbol,
+      this.valueOfCurrencie,
       this.flagUrl});
-
-  @override
-  List<Object?> get props => throw UnimplementedError();
 }

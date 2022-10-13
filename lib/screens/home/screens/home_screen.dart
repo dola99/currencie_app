@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
             SizedBox(
               height: 40,
             ),
-            MainCurreniceCounter()
+            MainCurreniceCounter(),
           ],
         ),
       ),

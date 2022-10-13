@@ -18,7 +18,7 @@ class CurrencySupportedModel {
             currenceySymbol: entry.value['currencySymbol'],
             currencyId: entry.value['currencyId'],
             flagUrl:
-                'https://flagcdn.com/60x45/${entry.key.toLowerCase()}.png'))
+                'https://flagcdn.com/112x84/${entry.key.toLowerCase()}.png'))
         .toList();
   }
 }

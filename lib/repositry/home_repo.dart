@@ -12,10 +12,8 @@ class HomeRepo {
         method: HttpMethod.GET,
         endPoint: ServicesURLs.supportedCurrenceyUrl,
         queryParams: {'apiKey': dotenv.env['API_KEY']});
-    print(response);
     if (response?['status'] != null &&
         (response!['status'] < 200 || response['status'] > 300)) {
-      print(response['error']);
       return Left(response['error']);
     } else {
       return Right(CurrencySupportedModel.fromJson(response!));

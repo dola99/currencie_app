@@ -1,5 +1,7 @@
 import 'package:currencie_app/bootstrap.dart';
+import 'package:currencie_app/controllers/converted_cubit/converted_cubit.dart';
 import 'package:currencie_app/controllers/home_cubit/home_cubit.dart';
+import 'package:currencie_app/models/common/converted_model.dart';
 import 'package:currencie_app/models/local_db/local_db_module.dart';
 import 'package:currencie_app/screens/home/screens/home_screen.dart';
 import 'package:currencie_app/utils/styles/colors_scheme.dart';
@@ -27,6 +29,9 @@ class StartPointMyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
             create: (context) => HomeCubit(),
           ),
+          BlocProvider<ConvertedCubit>(
+            create: (context) => ConvertedCubit(),
+          ),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -37,6 +42,8 @@ class StartPointMyApp extends StatelessWidget {
 
 void registerSingletons() {
   GetIt.I.registerLazySingleton<LocalDb>(() => LocalDb());
+  GetIt.I.registerLazySingleton<ConvertedModel>(() => ConvertedModel());
 }
 
 LocalDb get localDb => GetIt.I.get<LocalDb>();
+ConvertedModel get convertedModel => GetIt.I.get<ConvertedModel>();
